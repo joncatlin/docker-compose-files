@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+   db:
+     image: mysql:5.7
+#     volumes:
+#       - /mount/general-data/mysql/:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: root
+       MYSQL_DATABASE: pm
+       MYSQL_USER: pmuser
+       MYSQL_PASSWORD: pmuser
+
+   pm:
+     depends_on:
+       - db
+     image: eltercera/docker-processmaker:3.2-php5.6-apache
+     ports:
+       - "8082:80"
+     restart: always
+     environment:
+       HTTPD_SERVER_ADMIN: rodriguezrjrr@gmail.com
+       HTTPD_SERVER_ADMIN: 
+       PHP_POST_MAX_SIZE: 10M
+       PHP_UPLOAD_MAX_FILE_SIZE: 10M
+     links:
+       - db
+
+
+#     volumes:
+#       - /mount/general-data/wordpress/:/var/www/html/
+#       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+
+#docker run -d \
+#    -e "HTTPD_SERVER_ADMIN=rodriguezrjrr@gmail.com" \
+#    --link some-mysql:mysql
+#    -v /some/path:/opt/processmaker
+#    -p 8080:80 --name some-pkm eltercera/docker-processmaker

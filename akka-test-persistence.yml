@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+   akka-test-persistence:
+     image: joncatlin/akka-test-persistence:0.0.22
+     volumes:
+       - /home/sandbox/docker/temp:/temp
+     environment:
+       NUM_ACTORS: 150000 
+       FILENAME: /temp/datagen.bin
+     stdin_open: true
+     tty: true
+
