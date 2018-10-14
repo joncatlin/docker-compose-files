@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  webserver:
+    image: joncatlin/nginx-demo:1.0
+    networks:
+      - group1_net
+    ports: 
+      - 8080:80
+    deploy:
+      mode: replicated
+      replicas: 5
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+
+networks:
+  group1_net:
+
