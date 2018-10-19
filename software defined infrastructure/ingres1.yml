@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+  frontend1:
+    image: joncatlin/nginx-demo:1.0
+    networks:
+      - group1_net
+    ports: 
+      - 8080:80
+    deploy:
+      mode: replicated
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+
+  middle1:
+    image: busybox:1.28
+    command: /bin/top
+    networks:
+      - group1_net
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: dnsrr
+
+  backend1:
+    image: busybox:1.28
+    command: /bin/top
+    networks:
+      - group1_net
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: dnsrr
+
+networks:
+  group1_net:
+

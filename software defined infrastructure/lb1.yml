@@ -1,0 +1,36 @@
+version: '3.3'
+
+services:
+  frontend1:
+    image: busybox:1.28
+    command: /bin/top
+    networks:
+      - group1_net
+    deploy:
+      mode: replicated
+      replicas: 3
+      endpoint_mode: dnsrr
+
+  middle1:
+    image: busybox:1.28
+    command: /bin/top
+    networks:
+      - group1_net
+    deploy:
+      mode: replicated
+      replicas: 3
+      endpoint_mode: dnsrr
+
+  backend1:
+    image: busybox:1.28
+    command: /bin/top
+    networks:
+      - group1_net
+    deploy:
+      mode: replicated
+      replicas: 3
+      endpoint_mode: dnsrr
+
+networks:
+  group1_net:
+
