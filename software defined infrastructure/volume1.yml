@@ -1,0 +1,80 @@
+version: '3.4'
+
+services:
+  backend1:
+    image: busybox:1.28
+    command: /bin/top
+    networks:
+      - group1_net
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: dnsrr
+    volumes:
+      - type: volume
+        source: jon-vol1
+        target: /data
+        volume:
+          nocopy: true
+
+networks:
+  group1_net:
+
+volumes:
+  jon-vol1:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=10.0.0.5,rw
+      device: ":/volume1/vmstats-data"
+
+
+
+
+
+  backend1:
+    image: busybox:1.28
+    command: /bin/top
+    networks:
+      - group1_net
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: dnsrr
+    volumes:
+      - type: volume
+        source: mydata
+        target: /data
+        volume:
+          nocopy: true
+      - type: bind
+        source: ./static
+        target: /opt/app/static
+
+
+
+volumes:
+  mydata:
+  dbdata:
+
+
+volumes:
+  jon-vol1:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=10.0.0.5,rw
+      device: ":/volume1/vmstats-data"
+
+
+
+
+
+docker volume create --driver local \
+    --opt type=nfs \
+    --opt o=addr=192.168.1.1,rw \
+    --opt device=:/path/to/dir \
+    foo
+
+
+

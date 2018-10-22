@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  middle1:
+    image: busybox:1.28
+    command: /bin/top
+    networks:
+      - group1_net
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: dnsrr
+    volumes:
+      - type: volume
+        source: volume-middle1
+        target: /data
+        volume:
+          nocopy: true
+
+
+networks:
+  group1_net:
+
+volumes:
+  volume-middle1:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=10.0.0.5,rw
+      device: ":/volume1/vmstats-data/"
+

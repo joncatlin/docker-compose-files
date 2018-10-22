@@ -1,0 +1,88 @@
+##################################################################################################
+#
+# Demonstrates creating services each with a volume that is available despite the services
+# moving around the swarm cluster.
+#
+# Limitations:
+#    The main problem is that although the volume name will be prefixed with the stack name
+#    the location of the data in the common storage structure is fixed and hence two stacks
+#    with the different names will actually be pointing to the same storage area.
+##################################################################################################
+
+version: '3.4'
+
+services:
+  frontend1:
+    image: busybox:1.28
+    command: /bin/top
+    networks:
+      - group1_net
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: dnsrr
+    volumes:
+      - type: volume
+        source: volume-frontend1
+        target: /data
+        volume:
+          nocopy: true
+
+#  middle1:
+#    image: busybox:1.28
+#    command: /bin/top
+#    networks:
+#      - group1_net
+#    deploy:
+#      mode: replicated
+#      replicas: 1
+#      endpoint_mode: dnsrr
+#    volumes:
+#      - type: volume
+#        source: volume-middle1
+#        target: /data
+#        volume:
+#          nocopy: true
+
+#  backend1:
+#    image: busybox:1.28
+#    command: /bin/top
+#    networks:
+#      - group1_net
+#    deploy:
+#      mode: replicated
+#      replicas: 1
+#      endpoint_mode: dnsrr
+#    volumes:
+#      - type: volume
+#        source: volume-backend1
+#        target: /data
+#        volume:
+#          nocopy: true
+
+networks:
+  group1_net:
+
+volumes:
+  volume-frontend1:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=10.0.0.5,rw
+      device: ":/volume1/VM-File-Storage/${stackname}/volume-frontend1/"
+#      device: ":/volume1/VM-File-Storage/${stackname}/${stackname}-volume-frontend1"
+
+
+#  volume-middle1:
+#    driver: local
+#    driver_opts:
+#      type: nfs
+#      o: addr=10.0.0.5,rw
+#      device: ":/volume1/VM-File-Storage/middle1"
+#  volume-backend1:
+#    driver: local
+#    driver_opts:
+#      type: nfs
+#      o: addr=10.0.0.5,rw
+#      device: ":/volume1/VM-File-Storage/backend1"
+

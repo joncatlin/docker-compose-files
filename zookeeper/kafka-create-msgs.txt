@@ -1,0 +1,4 @@
+docker run \
+  --net=jon_zoo_net \
+  --rm confluentinc/cp-kafka:latest \
+  bash -c "seq 42 | kafka-console-producer --broker-list kafka2:19092 --topic jon && echo 'Produced 42 messages.'"
