@@ -23,9 +23,10 @@ networks:
 
 volumes:
   volume-middle1:
+    name: ${stackname}-volume-middle1
     driver: local
     driver_opts:
       type: nfs
       o: addr=10.0.0.5,rw
-      device: ":/volume1/vmstats-data/"
+      device: ":/volume7/VM-File-Storage/"
 

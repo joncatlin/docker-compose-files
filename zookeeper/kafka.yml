@@ -9,7 +9,10 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:19092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka1:19092
+      KAFKA_LISTENERS: PLAINTEXT://kafka1:19092
+    extra_hosts:
+      - "moby:127.0.0.1"
 
   kafka2:
     image: confluentinc/cp-kafka:latest
@@ -19,16 +22,24 @@ services:
     environment:
       KAFKA_BROKER_ID: 2
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:19092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka2:19092
+      KAFKA_LISTENERS: PLAINTEXT://kafka2:19092
+    extra_hosts:
+      - "moby:127.0.0.1"
 
-#  kafka3:
-#    hostname: kafka3
-#    networks:
-#      - zoo_net
-#    environment:
-#      KAFKA_BROKER_ID: 3
-#      KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
-#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:19092
+  kafka3:
+    image: confluentinc/cp-kafka:latest
+    hostname: kafka3
+    networks:
+      - zoo_net
+    environment:
+      KAFKA_BROKER_ID: 3
+      KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka3:19092
+      KAFKA_LISTENERS: PLAINTEXT://kafka3:19092
+    extra_hosts:
+      - "moby:127.0.0.1"
+
 
 networks:
   zoo_net:

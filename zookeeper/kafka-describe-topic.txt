@@ -1,3 +1,3 @@
 docker run   --net=jon_zoo_net \
   --rm   confluentinc/cp-kafka:latest \
-    kafka-topics --describe --topic bar --zookeeper zoo1:2181
+    kafka-topics --describe --topic jon --zookeeper zoo1:2181
