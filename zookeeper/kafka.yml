@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   kafka1:
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:5.2.0
     hostname: kafka1
     networks:
       - zoo_net
@@ -15,7 +15,7 @@ services:
       - "moby:127.0.0.1"
 
   kafka2:
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:5.2.0
     hostname: kafka2
     networks:
       - zoo_net
@@ -28,7 +28,7 @@ services:
       - "moby:127.0.0.1"
 
   kafka3:
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:5.2.0
     hostname: kafka3
     networks:
       - zoo_net

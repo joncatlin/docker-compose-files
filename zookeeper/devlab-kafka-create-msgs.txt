@@ -1,0 +1,4 @@
+docker run \
+  --net=kafka \
+  --rm confluentinc/cp-kafka:latest \
+  bash -c "seq 1000000 | kafka-console-producer --broker-list kafka1:19092,kafka2:19092,kafka3:19092 --topic jon && echo 'Produced 1000000 messages.'"

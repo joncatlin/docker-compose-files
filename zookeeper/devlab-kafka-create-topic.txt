@@ -1,0 +1,5 @@
+docker run \
+  --net=kafka \
+  --rm \
+  confluentinc/cp-kafka:latest \
+  kafka-topics --create --topic jon --partitions 6 --replication-factor 3 --if-not-exists --zookeeper zoo1:2181,zoo2:2181,zoo3:2181
