@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  pentaho-db:
+    image: postgres:10-alpine
+    environment:
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_USER: pentaho_user
+      POSTGRES_DB: pentaho_db
+    networks:
+      - pentaho
+
+  pentaho-di:
+    image: bretif/pentaho:8.2
+    environment:
+      PGHOST: pentaho-db
+      PGPORT: 5432
+      PGDATABASE: pentaho_db
+      PGUSER: pentaho_user
+      PGPASSWORD: changeme
+    ports:
+      - "8080:8080"
+    networks:
+      - pentaho
+
+networks:
+  pentaho:
