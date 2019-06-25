@@ -26,6 +26,6 @@ services:
       - ./processed:/processed
     networks:
       - pentaho
-
+ 
 networks:
   pentaho:
