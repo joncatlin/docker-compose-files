@@ -11,7 +11,7 @@ services:
       - pentaho
 
   pentaho-di:
-    image: bretif/pentaho:8.2
+    image: joncatlin/pentaho-di
     environment:
       PGHOST: pentaho-db
       PGPORT: 5432
@@ -20,6 +20,10 @@ services:
       PGPASSWORD: changeme
     ports:
       - "8080:8080"
+    volumes:
+      - ./input:/input
+      - ./output:/output
+      - ./processed:/processed
     networks:
       - pentaho
 
