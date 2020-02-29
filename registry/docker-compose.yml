@@ -9,10 +9,10 @@ services:
           - node.labels.registry == true
     environment:
       # REGISTRY_HTTP_ADDR: 0.0.0.0:443
-      REGISTRY_HTTP_TLS_CERTIFICATE: "/run/secrets/domain.crt"
-      REGISTRY_HTTP_TLS_KEY: "/run/secrets/domain.key"
-      # REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
-      # REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+      # REGISTRY_HTTP_TLS_CERTIFICATE: "/run/secrets/domain.crt"
+      # REGISTRY_HTTP_TLS_KEY: "/run/secrets/domain.key"
+      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
+      REGISTRY_HTTP_TLS_KEY: /certs/domain.key
       # REGISTRY_AUTH: htpasswd
       # REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
       # REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
