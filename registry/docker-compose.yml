@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+  registry:
+    image: registry:2
+    secrets:
+      - domain.crt
+      - domain.key
+    deploy:
+      placement:
+        constraints:
+          - node.labels.registry == true
+    environment:
+      REGISTRY_HTTP_ADDR: 0.0.0.0:443
+      REGISTRY_HTTP_TLS_CERTIFICATE: /run/secrets/domain.crt
+      REGISTRY_HTTP_TLS_KEY: /run/secrets/domain.key
+    ports:
+      - target: 443
+        published: 443
+    volumes:
+      - type: bind
+        source: /mnt/swarm-shared/registry
+        target: /var/lib/registry
+
+secrets:
+  domain.crt:
+    external: true
+  domain.key:
+    external: true
