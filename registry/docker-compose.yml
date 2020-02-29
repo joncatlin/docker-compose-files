@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.7'
 
 services:
   registry:
@@ -12,8 +12,8 @@ services:
           - node.labels.registry == true
     environment:
       REGISTRY_HTTP_ADDR: 0.0.0.0:443
-      REGISTRY_HTTP_TLS_CERTIFICATE: /run/secrets/domain.crt
-      REGISTRY_HTTP_TLS_KEY: /run/secrets/domain.key
+      REGISTRY_HTTP_TLS_CERTIFICATE: "/run/secrets/domain.crt"
+      REGISTRY_HTTP_TLS_KEY: "/run/secrets/domain.key"
     ports:
       - target: 443
         published: 443
