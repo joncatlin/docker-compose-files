@@ -2,54 +2,45 @@ version: '3.1'
 
 services:
   kafka1:
-# Working version before upgrade
-#    image: confluentinc/cp-kafka:5.2.0
-    image: confluentinc/cp-kafka:5.4.1
+    image: confluentinc/cp-kafka:5.2.0
     hostname: kafka1
     networks:
-      - kafka
+      - zoo_net
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka1:19092
       KAFKA_LISTENERS: PLAINTEXT://kafka1:19092
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: any
+    extra_hosts:
+      - "moby:127.0.0.1"
 
   kafka2:
-    image: confluentinc/cp-kafka:5.4.1
+    image: confluentinc/cp-kafka:5.2.0
     hostname: kafka2
     networks:
-      - kafka
+      - zoo_net
     environment:
       KAFKA_BROKER_ID: 2
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka2:19092
       KAFKA_LISTENERS: PLAINTEXT://kafka2:19092
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: any
+    extra_hosts:
+      - "moby:127.0.0.1"
 
   kafka3:
-    image: confluentinc/cp-kafka:5.4.1
+    image: confluentinc/cp-kafka:5.2.0
     hostname: kafka3
     networks:
-      - kafka
+      - zoo_net
     environment:
       KAFKA_BROKER_ID: 3
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka3:19092
       KAFKA_LISTENERS: PLAINTEXT://kafka3:19092
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: any
+    extra_hosts:
+      - "moby:127.0.0.1"
 
 
 networks:
-  kafka:
-    external: true
+  zoo_net:
 

@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  frontend1:
+#    container_name: {{.Id}}
+    image: busybox:1.28
+    command: /bin/top
+    environment:
+      JON_NAME: {{.}}
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: dnsrr
+#      labels:
+#        com.example.description: {{.Id}}
+
