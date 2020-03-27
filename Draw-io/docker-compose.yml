@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  draw-io:
+    image: jgraph/drawio
+    # environment:
+    #   DISABLE_GOOGLE_CHROME: 0
+    #   DEFAULT_GOOGLE_CHROME_RPCC_BUFFER_SIZE: 3048576
+    #   DISABLE_UNOCONV: 1
+    #   DEFAULT_WAIT_TIMEOUT: "30"
+    #   MAXIMUM_WAIT_TIMEOUT: "60"
+    #   DEFAULT_WEBHOOK_URL_TIMEOUT: "10.0"
+    #   MAXIMUM_WEBHOOK_URL_TIMEOUT: "2.5"
+    #   MAXIMUM_WAIT_DELAY: "10"
+    ports:
+    - "8084:8080"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+    # networks:
+    #   - gotenberg
+
+# networks:
+#   gotenberg:
+#     external: true
+

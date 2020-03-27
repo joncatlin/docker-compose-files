@@ -3,8 +3,7 @@ version: '3.1'
 services:
   kafka1:
 # Working version before upgrade
-#    image: confluentinc/cp-kafka:5.2.0
-    image: confluentinc/cp-kafka:5.4.1
+    image: confluentinc/cp-kafka:5.2.0
     hostname: kafka1
     networks:
       - kafka
@@ -19,7 +18,7 @@ services:
         condition: any
 
   kafka2:
-    image: confluentinc/cp-kafka:5.4.1
+    image: confluentinc/cp-kafka:5.2.0
     hostname: kafka2
     networks:
       - kafka
@@ -34,7 +33,7 @@ services:
         condition: any
 
   kafka3:
-    image: confluentinc/cp-kafka:5.4.1
+    image: confluentinc/cp-kafka:5.2.0
     hostname: kafka3
     networks:
       - kafka
